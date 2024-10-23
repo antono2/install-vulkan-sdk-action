@@ -171,23 +171,24 @@ export function get_vulkan_sdk_filename(version: string): string {
 // }
 
 function compareVersionNumbers(v1: string, v2: string): number {
-  const int_arr_v1 = v1.split(".")
-  const int_arr_v2 = v2.split(".")
+  const int_arr_v1 = v1.split('.')
+  const int_arr_v2 = v2.split('.')
 
-	// Not assuming the split arr len is the same for both versions.
-	// Meaning this should work for v1:1.2.345 v2:1.2.345.6 
-  for(var i in int_arr_v1)
-  { 
-		const int_v1 = parseInt(int_arr_v1[i])
-		int_v2 = 0
-		if (i < int_arr_v2.length) {
-			int_v2 = parseInt(int_arr_v2[i])
-		}
+  // Not assuming the split arr len is the same for both versions.
+  // Meaning this should work for v1:1.2.345 v2:1.2.345.6
+  let i = 0
+  for (var v1 in int_arr_v1) {
+    const int_v1 = parseInt(v1)
+    let int_v2 = 0
+    if (i < int_arr_v2.length) {
+      int_v2 = parseInt(int_arr_v2[i])
+    }
     if (int_v1 < int_v2) {
       return -1
     } else if (int_v1 > int_v2) {
       return 1
     }
+    i = i + 1
   }
   return 0
 }
