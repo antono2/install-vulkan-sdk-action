@@ -155,17 +155,39 @@ export function get_vulkan_sdk_filename(version: string): string {
  * @param {string} ver2 - The second version number string.
  * @returns {number} Returns -1 if ver1 is less than ver2, 1 if ver1 is greater than ver2, or 0 if they are equal.
  */
-function compareVersionNumbers(v1: string, v2: string): number {
-  // remove dots and handle strings as integers
-  const int_v1 = parseInt(v1.replace(/\./g, ''))
-  const int_v2 = parseInt(v2.replace(/\./g, ''))
+// function compareVersionNumbers(v1: string, v2: string): number {
+//   // remove dots and handle strings as integers
+//   const int_v1 = parseInt(v1.replace(/\./g, ''))
+//   const int_v2 = parseInt(v2.replace(/\./g, ''))
 
-  // compare the integers
-  if (int_v1 < int_v2) {
-    return -1
-  } else if (int_v1 > int_v2) {
-    return 1
-  } else {
-    return 0
+//   // compare the integers
+//   if (int_v1 < int_v2) {
+//     return -1
+//   } else if (int_v1 > int_v2) {
+//     return 1
+//   } else {
+//     return 0
+//   }
+// }
+
+function compareVersionNumbers(v1: string, v2: string): number {
+  const int_arr_v1 = v1.split(".")
+  const int_arr_v2 = v2.split(".")
+
+	// Not assuming the split arr len is the same for both versions.
+	// Meaning this should work for v1:1.2.345 v2:1.2.345.6 
+  for(var i in int_arr_v1)
+  { 
+		const int_v1 = parseInt(int_arr_v1[i])
+		int_v2 = 0
+		if (i < int_arr_v2.length) {
+			int_v2 = parseInt(int_arr_v2[i])
+		}
+    if (int_v1 < int_v2) {
+      return -1
+    } else if (int_v1 > int_v2) {
+      return 1
+    }
   }
+  return 0
 }
