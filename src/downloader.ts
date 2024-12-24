@@ -178,10 +178,10 @@ function compareVersionNumbers(v1: string, v2: string): number {
   // Meaning this should work for v1:1.2.345 v2:1.2.345.6
   let i = 0
   for (var v1 in int_arr_v1) {
-    const int_v1 = parseInt(v1)
+    const int_v1 = parseInt(v1) ?? 0;
     let int_v2 = 0
     if (i < int_arr_v2.length) {
-      int_v2 = parseInt(int_arr_v2[i])
+      int_v2 = parseInt(int_arr_v2[i]) ?? 0;
     }
     if (int_v1 < int_v2) {
       return -1
